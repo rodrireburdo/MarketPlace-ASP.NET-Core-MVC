@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">Bienvenido al dashboard </h1>
+    <p class="lead"> Aqui encontraras enlaces a los indices de los demas controladores </p>
+    <div class="list-group">
+        @* ENlaces a los demas controladores *@
+        <a href="@Url.Action("Index", "Usuarios")" class="list-group-item list-group-item-action">Usuarios</a>
+        <a href="@Url.Action("Index", "Pedidos")" class="list-group-item list-group-item-action">Pedidos</a>
+        <a href="@Url.Action("Index", "Categorias")" class="list-group-item list-group-item-action">Categorias</a>
+        <a href="@Url.Action("Index", "Articulos")" class="list-group-item list-group-item-action">Articulos</a>
+        <a href="@Url.Action("Index", "Productos")" class="list-group-item list-group-item-action">Productos</a>
+        <a href="@Url.Action("Index", "Roles")" class="list-group-item list-group-item-action">Roles</a>
+    </div>
+</div>
