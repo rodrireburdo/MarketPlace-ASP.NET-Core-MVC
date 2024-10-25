@@ -1,4 +1,4 @@
-namespace AppCrud.Models
+namespace AppCrud.Models.ViewModels
 {
     public class ErrorViewModel
     {
