@@ -1,23 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AppCrud.Data;
 using AppCrud.Models;
 
 namespace AppCrud.Controllers
 {
-    public class CategoriasController : Controller
+    public class CategoriasController : BaseController
     {
-        private readonly ApplicationDbContext _context;
-
-        public CategoriasController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        public CategoriasController(ApplicationDbContext context) : base(context)
+        { }
 
         // GET: Categorias
         public async Task<IActionResult> Index()

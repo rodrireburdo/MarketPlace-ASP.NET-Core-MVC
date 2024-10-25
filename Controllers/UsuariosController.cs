@@ -10,14 +10,10 @@ using AppCrud.Models;
 
 namespace AppCrud.Controllers
 {
-    public class UsuariosController : Controller
+    public class UsuariosController : BaseController
     {
-        private readonly ApplicationDbContext _context;
-
-        public UsuariosController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        public UsuariosController(ApplicationDbContext context) : base(context)
+        { }
 
         // GET: Usuarios
         public async Task<IActionResult> Index()

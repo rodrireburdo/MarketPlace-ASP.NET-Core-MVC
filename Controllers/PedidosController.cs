@@ -6,14 +6,10 @@ using AppCrud.Models;
 
 namespace AppCrud.Controllers
 {
-    public class PedidosController : Controller
+    public class PedidosController : BaseController
     {
-        private readonly ApplicationDbContext _context;
-
-        public PedidosController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        public PedidosController(ApplicationDbContext context) : base(context)
+        { }
 
         // GET: Pedidos
         public async Task<IActionResult> Index()

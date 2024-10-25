@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AppCrud.Data;
@@ -10,14 +6,10 @@ using AppCrud.Models;
 
 namespace AppCrud.Controllers
 {
-    public class DetallesPedidosController : Controller
+    public class DetallesPedidosController : BaseController
     {
-        private readonly ApplicationDbContext _context;
-
-        public DetallesPedidosController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        public DetallesPedidosController(ApplicationDbContext context) : base(context)
+        { }
 
         // GET: DetallesPedidos
         public async Task<IActionResult> Index()

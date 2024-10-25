@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AppCrud.Data;
@@ -10,14 +6,11 @@ using AppCrud.Models;
 
 namespace AppCrud.Controllers
 {
-    public class DireccionesController : Controller
+    public class DireccionesController : BaseController
     {
-        private readonly ApplicationDbContext _context;
 
-        public DireccionesController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        public DireccionesController(ApplicationDbContext context) : base(context)
+        { }
 
         // GET: Direcciones
         public async Task<IActionResult> Index()

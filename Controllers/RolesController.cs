@@ -1,23 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AppCrud.Data;
 using AppCrud.Models;
 
 namespace AppCrud.Controllers
 {
-    public class RolesController : Controller
+    public class RolesController : BaseController
     {
-        private readonly ApplicationDbContext _context;
-
-        public RolesController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        public RolesController(ApplicationDbContext context) : base(context)
+        { }
 
         // GET: Roles
         public async Task<IActionResult> Index()

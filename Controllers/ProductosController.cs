@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AppCrud.Data;
@@ -10,14 +6,10 @@ using AppCrud.Models;
 
 namespace AppCrud.Controllers
 {
-    public class ProductosController : Controller
+    public class ProductosController : BaseController
     {
-        private readonly ApplicationDbContext _context;
-
-        public ProductosController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        public ProductosController(ApplicationDbContext context) 
+            : base(context) { }
 
         // GET: Productos
         public async Task<IActionResult> Index()
@@ -57,7 +49,12 @@ namespace AppCrud.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductoId,Codigo,Nombre,Modelo,Descripcion,Precio,Imagen,CategoriaId,Stock,Marca,Activo")] Producto producto)
+        public async Task<IActionResult> Create(
+            [Bind(
+                "ProductoId,Codigo,Nombre,Modelo,Descripcion,Precio,Imagen,CategoriaId,Stock,Marca,Activo"
+            )] 
+                Producto producto
+            )
         {
             { var cat = await _context.Categorias
                     .Where(c=> c.CategoriaId == producto.CategoriaId)
@@ -109,9 +106,39 @@ namespace AppCrud.Controllers
             {
                 return NotFound();
             }
+            var cat = await _context.Categorias
+                .Where(c => c.CategoriaId == producto.CategoriaId)
+                .FirstOrDefaultAsync();
+
+            if (cat != null)
+            {
+                producto.Categoria = cat;
+                try
+                {
+                    _context.Update(producto);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ProductoExists(producto.ProductoId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
 
             
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "CategoriaId", "Descripcion", producto.CategoriaId);
+            ViewData["CategoriaId"] = new SelectList(
+                _context.Categorias, 
+                "CategoriaId", 
+                "Descripcion", 
+                producto.CategoriaId
+            );
             return View(producto);
         }
 
